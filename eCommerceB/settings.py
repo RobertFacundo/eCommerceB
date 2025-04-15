@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-bp&powdkx)pf^lvs(_%f$+ttvqlt$o8q)ty-02j_)mem&9juk7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com']
 
 
 # Application definition
@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'eCommerceB.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if os.getenv('RENDER'):
+if os.getenv('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config(
             conn_max_age=600,
@@ -130,3 +130,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
