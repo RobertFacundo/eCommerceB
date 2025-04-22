@@ -27,7 +27,14 @@ SECRET_KEY = 'django-insecure-bp&powdkx)pf^lvs(_%f$+ttvqlt$o8q)ty-02j_)mem&9juk7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = [ '127.0.0.1',      # para desarrollo local
+    'localhost', 
+    '.onrender.com'
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React local
+]
 
 
 # Application definition
@@ -39,9 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
