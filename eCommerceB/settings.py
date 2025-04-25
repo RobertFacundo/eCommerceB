@@ -27,10 +27,7 @@ SECRET_KEY = 'django-insecure-bp&powdkx)pf^lvs(_%f$+ttvqlt$o8q)ty-02j_)mem&9juk7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '127.0.0.1',      # para desarrollo local
-    'localhost', 
-    '.onrender.com'
-]
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React local
