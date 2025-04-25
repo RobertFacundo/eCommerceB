@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'eCommerceB.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-print(os.getenv('DATABASE_URL')) 
+print("!!!!!!DATABASE_URL:",os.getenv('DATABASE_URL')) 
 
 if os.getenv('DATABASE_URL'):
     DATABASES = {
