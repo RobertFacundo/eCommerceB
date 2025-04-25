@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .models import Product
+from .models import Product, Cart, CartItem
+from django.contrib.auth import get_user_model
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,14 +29,39 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
-        user = User.objects.filter(username=data['username']).first()
+        try:
+            # Obtener el usuario por nombre de usuario
+            user = get_user_model().objects.get(username=data['username'])
+        except get_user_model().DoesNotExist:
+            raise serializers.ValidationError('Invalid credentials')
+
+        # Verificar la contraseña del usuario
         if user and user.check_password(data['password']):
+            # Crear o recuperar el token
             token, created = Token.objects.get_or_create(user=user)
-            return{
+            return {
                 'token': token.key,
-                'user_id':user.id,
-                'username':user.username,
+                'user_id': user.id,
+                'username': user.username,
             }
         else:
-            raise serializers.ValidationError('invalid Credentials')
+            raise serializers.ValidationError('Invalid credentials')
+        
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+
+    class Meta:
+        model = CartItem
+        fields = ['product', 'quantity']
+
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
+    total = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Cart
+        fields = ['id', 'user', 'items', 'total']
+
+    def get_total(self, obj):
+        return obj.total()
 
