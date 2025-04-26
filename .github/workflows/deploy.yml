@@ -3,7 +3,7 @@ name: Deploy to Render and Run Migrations
 on:
   push:
     branches:
-      - main  # O la rama que estés usando
+      - master
 
 jobs:
   deploy:
@@ -28,7 +28,7 @@ jobs:
       run: |
         # Aquí va el comando para hacer el deploy a Render
         # Asegúrate de tener las variables de entorno configuradas correctamente
-        git remote add render https://git@render.com/tu-repo.git
+        git remote add render https://git@render.com/RobertFacundo/eCommerceB
         git push render main
 
     - name: Run migrations on Render
