@@ -24,13 +24,6 @@ jobs:
         source venv/bin/activate
         pip install -r requirements.txt
 
-    - name: Deploy to Render
-      run: |
-        # Aquí va el comando para hacer el deploy a Render
-        # Asegúrate de tener las variables de entorno configuradas correctamente
-        git remote add render https://git@render.com/RobertFacundo/eCommerceB
-        git push render main
-
     - name: Run migrations on Render
       run: |
         # Ejecutar las migraciones en el entorno de Render
