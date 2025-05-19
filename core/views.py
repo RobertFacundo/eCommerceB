@@ -27,7 +27,7 @@ def home(request):
           <p style="font-size: 18px; color: #555; margin-bottom: 20px; font-weight: bold;">
             Now that we know the backend is up and running, feel free to visit the website:
           </p>
-          <a href="https://authf-yama.vercel.app/" target="_blank" 
+          <a href="https://ecommercef-five.vercel.app/" target="_blank" 
              style="font-size: 18px; color: #3498db; text-decoration: none; font-weight: bold; padding: 10px 20px; background-color: #ecf0f1; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
             👉 Go to the website
           </a>
