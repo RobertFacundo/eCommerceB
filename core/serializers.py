@@ -39,10 +39,18 @@ class LoginSerializer(serializers.Serializer):
         if user and user.check_password(data['password']):
             # Crear o recuperar el token
             token, created = Token.objects.get_or_create(user=user)
+
+            cart = Cart.objects.filter(user=user).first()
+            cart_data = CartSerializer(cart).data if cart else None
+
             return {
                 'token': token.key,
-                'user_id': user.id,
-                'username': user.username,
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email
+                },
+                'cart': cart_data
             }
         else:
             raise serializers.ValidationError('Invalid credentials')
