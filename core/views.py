@@ -113,3 +113,15 @@ class CartViewSet(viewsets.ModelViewSet):
             return Response({"detail":"Product not found"}, status=status.HTTP_404_NOT_FOUND)
         except CartItem.DoesNotExist:
             return Response({"detail":"Product not in cart"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=['post'])
+    def clear(self, request):
+        cart = request.user.cart
+        if not cart:
+            return Response({'detail':'Cart not found'}, status.HTTP_404_NOT_FOUND)
+        cart.items.all().delete()
+        cart.total = 0
+        cart.save()
+
+        return Response({'message': 'Cart cleared successfully'}, status=status.HTTP_200_OK)
+        
