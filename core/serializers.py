@@ -73,3 +73,6 @@ class CartSerializer(serializers.ModelSerializer):
     def get_total(self, obj):
         return obj.total()
 
+class AddProductSerializer(serializers.Serializer):
+    product_id = serializers.IntegerField()
+    quantity = serializers.IntegerField(default=1)

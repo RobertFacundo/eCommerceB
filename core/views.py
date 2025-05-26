@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import Product, Cart, CartItem
-from .serializers import ProductSerializer, CartItemSerializer, CartSerializer
+from .serializers import ProductSerializer, CartItemSerializer, CartSerializer, AddProductSerializer
 from django.http import HttpResponse
 
 from rest_framework import status
@@ -10,6 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth.models import User
 from .serializers import RegisterSerializer, LoginSerializer
+
+from drf_yasg.utils import swagger_auto_schema
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset =  Product.objects.all()
@@ -42,6 +44,7 @@ def home(request):
 class RegisterView(APIView):
     permission_classes = [AllowAny]
     
+    @swagger_auto_schema(request_body=RegisterSerializer)
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -52,6 +55,8 @@ class RegisterView(APIView):
     
 class LoginView(APIView):
     permission_classes = [AllowAny]
+
+    @swagger_auto_schema(request_body=LoginSerializer)
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -69,6 +74,7 @@ class CartViewSet(viewsets.ModelViewSet):
         else:
             return Response({"detail": "Cart not found"}, status=status.HTTP_404_NOT_FOUND)
     
+    @swagger_auto_schema(request_body=AddProductSerializer)
     @action(detail=False, methods=['post'])
     def add_product(self, request): 
         product_id = request.data.get('product_id')
@@ -92,6 +98,7 @@ class CartViewSet(viewsets.ModelViewSet):
         except Product.DoesNotExist:
             return Response({"detail":"Product not found"}, status=status.HTTP_404_NOT_FOUND)
         
+    @swagger_auto_schema(request_body=AddProductSerializer)    
     @action(detail=False, methods=['post'])
     def remove_product(self, request):
         product_id = request.data.get('product_id')
