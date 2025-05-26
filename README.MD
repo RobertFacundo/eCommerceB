@@ -78,7 +78,7 @@ Request Body:
   "product_id": <int>,
   "quantity": <int>
 }
-` 
+```
 POST /cart/remove_product/ – Remove a product from the cart
 Request Body:
 ```json
