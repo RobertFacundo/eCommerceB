@@ -73,7 +73,7 @@ GET /cart/ – Retrieve the authenticated user's cart
 
 POST /cart/add_product/ – Add a product to the cart
 Request Body:
-` ```json
+```json
 {
   "product_id": <int>,
   "quantity": <int>
@@ -81,11 +81,11 @@ Request Body:
 ` 
 POST /cart/remove_product/ – Remove a product from the cart
 Request Body:
-` ```json
+```json
 {
   "product_id": <int>
 }
-` 
+```
 POST /cart/clear/ – Remove all items from the cart
 
 🔐 All cart endpoints require user authentication.
@@ -97,21 +97,21 @@ Routes:
 
 POST /register/ – Register a new user
 Request Body:
-` ```json
+```json
 {
   "username": "yourUsername",
   "email": "yourEmail@example.com",
   "password": "yourPassword"
 }
-` 
+```
 POST /login/ – Log in an existing user
 Request Body:
-` ```json
+```json
 {
   "username": "yourUsername",
   "password": "yourPassword"
 }
-` 
+```
 📌 The login response includes user credentials. If you're using JWT, the token should be used for authorized requests.
 
 ------------
