@@ -21,6 +21,9 @@ working together to provide an eCommerce.
 
 -Backend: Deployed to Render using the VSC CLI, handles authentication and data processing.
 
+## Environment Variables
+Set appropriate environment variables for both frontend and backend to define API URLs and other settings based on the deployment environment (development or production).
+
 ---
 
 # Backend
